@@ -15,6 +15,7 @@ class Pieces:
         self.physical_position = physical_position
         self.info = info
 
+
     def load_image(self, screen, square_width, square_height):
         png_name = self.info[0]
         phy_position_x = self.physical_position[0]

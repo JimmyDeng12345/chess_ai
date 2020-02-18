@@ -26,11 +26,14 @@ class GameThread:
         clicked = False
         possible_moves = []
         last_turn = "b"
+        isCheck = False
         while game_running:
             screen.blit(background, (0, 0))
             # screen.blit(pieces_image, (200, 0))
             dummy.loadAll(screen, square_width, square_height)
             dummy.load_dots(screen, square_width, square_height, possible_moves)
+            if isCheck:
+                dummy.load_check(screen, square_width, square_height, dummy.lookfor("K" + dummy.get_opposite_color(last_turn))[0])
             pygame.display.update()
             # dummy.load_dots(screen,square_width,square_height,possible_moves)
             # print(possible_moves)
@@ -69,6 +72,11 @@ class GameThread:
                             # print("moved")
                             dummy.move_to_coord(from_coord, coord)
                             # dummy.print_board()
+                            if dummy.isCheck(last_turn):
+                                #dummy.load_check(screen,square_width,square_height,dummy.lookfor("K" + last_turn)[0])
+                                isCheck = True
+                            else:
+                                isCheck = False
                             possible_moves = []
                             clicked = False
                             last_turn = this_turn
